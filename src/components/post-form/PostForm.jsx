@@ -38,6 +38,9 @@ export default function PostForm  ({ post })  {
       }
     } else {
       const file = await appwriteService.uploadFile(data.image[0]);
+      
+      //There was an error
+
 
       if (file) {
         const fileId = file.$id;

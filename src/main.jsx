@@ -6,6 +6,9 @@ import store from "./store/store.js";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { AuthLayout, Login } from "./components/index.js";
+import { ToastContainer } from 'react-toastify'; // Import ToastContainer
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import Home from "./pages/Home.jsx";
 
@@ -93,5 +96,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <RouterProvider router={router} />
+    <ToastContainer />
   </Provider>
 );

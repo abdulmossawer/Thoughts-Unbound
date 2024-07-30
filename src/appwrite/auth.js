@@ -4,6 +4,7 @@ import { Client, Account, ID } from "appwrite";
 export class AuthService {
   client = new Client();
   account;
+  
   constructor() {
     this.client
       .setEndpoint(conf.appwriteUrl)
@@ -13,7 +14,6 @@ export class AuthService {
 
   async createAccount({ email, password, name }) {
     try {
-      console.log("cretaeAccount in appwrite",email);
       const userAccount = await this.account.create(
         ID.unique(),
         email,
@@ -21,8 +21,8 @@ export class AuthService {
         name
       );
       if (userAccount) {
-        // call another function
         return this.login({ email, password });
+        
       } else {
         return userAccount;
       }
@@ -33,15 +33,8 @@ export class AuthService {
 
   async login({ email, password }) {
     try {
-      console.log("login in appwrite",email);
-      console.log("account here is " + JSON.stringify(this.account));
-      console.log("this here is ",this);
-      // console.log("account here is " + this.account.client);
-      const dt=await this.account.createEmailPasswordSession(email, password);
-      console.log("dt here is ",dt);
-      return dt;
+      return await this.account.createEmailPasswordSession(email, password);
     } catch (error) {
-      console.log("error in login appwrite ",error);
       throw error;
     }
   }

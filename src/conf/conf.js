@@ -5,11 +5,7 @@ const conf = {
   appwriteCollectionId: String(import.meta.env.VITE_REACT_APPWRITE_COLLECTION_ID),
   appwriteCommentsCollectionId: String(import.meta.env.VITE_REACT_APPWRITE_COMMENTS_COLLECTION_ID), 
   appwriteBucketId: String(import.meta.env.VITE_REACT_APPWRITE_BUCKET_ID),
+  tinyMceApiKey: String(import.meta.env.VITE_TINYMCE_API_KEY), 
 };
 
 export default conf;
-
-
-
-
-

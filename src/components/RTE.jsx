@@ -13,7 +13,7 @@ export const RTE = ({ name, control, label, defaultValue = "" }) => {
         control={control}
         render={({ field: { onChange, value } }) => (
           <Editor
-            apiKey={conf.tinyMceApiKey} // Use the key from the config
+            apiKey='d8zxocw5pxoilj9jq1mqdzwpmnn9icbsvdaoeghvskkrnoag'
             initialValue={defaultValue}
             init={{
               readonly: false,

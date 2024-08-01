@@ -15,21 +15,13 @@ export class Service {
   }
 
   validateSlug(slug) {
-    const validChars = /^[a-zA-Z0-9._-]{1,36}$/;
+    const validChars = /^[a-zA-Z0-9._-]{1,255}$/; // Increase limit to 255
     return validChars.test(slug);
   }
 
-  async createPost({
-    title,
-    slug,
-    content,
-    featuredImage,
-    status,
-    userId,
-    userName,
-  }) {
+  async createPost({ title, slug, content, featuredImage, status, userId, userName }) {
     if (!this.validateSlug(slug)) {
-      throw new Error("Invalid slug: Must be 36 characters or less, and only contain alphanumeric characters, periods, hyphens, and underscores.");
+      throw new Error("Invalid slug: Must be 255 characters or less, and only contain alphanumeric characters, periods, hyphens, and underscores.");
     }
 
     try {
@@ -54,7 +46,7 @@ export class Service {
 
   async updatePost(slug, { title, content, featuredImage, status }) {
     if (!this.validateSlug(slug)) {
-      throw new Error("Invalid slug: Must be 36 characters or less, and only contain alphanumeric characters, periods, hyphens, and underscores.");
+      throw new Error("Invalid slug: Must be 255 characters or less, and only contain alphanumeric characters, periods, hyphens, and underscores.");
     }
 
     try {
@@ -76,7 +68,7 @@ export class Service {
 
   async deletePost(slug) {
     if (!this.validateSlug(slug)) {
-      throw new Error("Invalid slug: Must be 36 characters or less, and only contain alphanumeric characters, periods, hyphens, and underscores.");
+      throw new Error("Invalid slug: Must be 255 characters or less, and only contain alphanumeric characters, periods, hyphens, and underscores.");
     }
 
     try {
@@ -94,7 +86,7 @@ export class Service {
 
   async getPost(slug) {
     if (!this.validateSlug(slug)) {
-      throw new Error("Invalid slug: Must be 36 characters or less, and only contain alphanumeric characters, periods, hyphens, and underscores.");
+      throw new Error("Invalid slug: Must be 255 characters or less, and only contain alphanumeric characters, periods, hyphens, and underscores.");
     }
 
     try {
@@ -210,4 +202,3 @@ export class Service {
 }
 
 const service = new Service();
-export default service;

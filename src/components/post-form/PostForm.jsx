@@ -73,11 +73,13 @@ export default function PostForm({ post }) {
       return value
         .trim()
         .toLowerCase()
-        .replace(/[^a-zA-Z\d\s]+/g, "-")
-        .replace(/\s/g, "-");
-
+        .replace(/[^a-zA-Z\d\s]+/g, "-") // Replace non-alphanumeric and non-space characters with hyphen
+        .replace(/\s/g, "-")
+        .slice(0, 255); // Ensure the slug is at most 255 characters
+  
     return "";
   }, []);
+  
 
   React.useEffect(() => {
     const subscription = watch((value, { name }) => {

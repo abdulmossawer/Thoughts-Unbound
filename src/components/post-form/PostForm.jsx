@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "../index";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { toast } from 'react-toastify'; // Import toast
+import { toast } from 'react-toastify'; // Import toasta
 
 export default function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } = useForm({

@@ -11,7 +11,7 @@ export const RTE = ({ name, control, label, defaultValue = "" }) => {
       <Controller
         name={name || "content"}
         control={control}
-        render={({ field: { onChange } }) => (
+        render={({ field: { onChange, value } }) => (
           <Editor
             apiKey={conf.tinyMceApiKey} // Use the key from the config
             initialValue={defaultValue}
@@ -24,7 +24,6 @@ export const RTE = ({ name, control, label, defaultValue = "" }) => {
                 "autolink",
                 "lists",
                 "link",
-                "image",
                 "charmap",
                 "preview",
                 "anchor",
@@ -35,16 +34,15 @@ export const RTE = ({ name, control, label, defaultValue = "" }) => {
                 "insertdatetime",
                 "media",
                 "table",
-                "code",
                 "help",
                 "wordcount",
-                "anchor",
               ],
               toolbar:
-                "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help",
+                "undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help",
               content_style:
                 "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             }}
+            value={value}
             onEditorChange={onChange}
           />
         )}

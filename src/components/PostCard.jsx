@@ -5,7 +5,7 @@ import appwriteService from "../appwrite/config";
 function PostCard({ $id, title, featuredImage, userName }) {
   return (
     <Link to={`/post/${$id}`} className="block">
-      <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-700 p-4 transition-transform transform hover:scale-105">
+      <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-700 p-4 transition-transform transform hover:scale-105 mx-auto">
         <div className="flex items-center mb-4">
           {/* <div className="mr-4">
             <img
@@ -13,7 +13,7 @@ function PostCard({ $id, title, featuredImage, userName }) {
               alt={userName}
               className="rounded-full w-10 h-10"
             />
-          // </div> */}
+          </div> */}
           <div>
             <h3 className="text-md font-semibold text-gray-900 dark:text-white">
               {userName}

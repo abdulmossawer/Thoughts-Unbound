@@ -16,6 +16,7 @@ export const RTE = ({ name, control, label, defaultValue = "" }) => {
             apiKey={conf.tinyMceApiKey} // Use the key from the config
             initialValue={defaultValue}
             init={{
+              readonly: false,
               height: 500,
               menubar: true,
               plugins: [

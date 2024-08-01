@@ -38,11 +38,11 @@ export const RTE = ({ name, control, label, defaultValue = "" }) => {
                 "wordcount",
               ],
               toolbar:
-                "undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help",
+                "undo redo | formatselect | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help",
               content_style:
                 "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             }}
-            value={value}
+            value={value} // Ensure editor reflects the form field value
             onEditorChange={onChange}
           />
         )}

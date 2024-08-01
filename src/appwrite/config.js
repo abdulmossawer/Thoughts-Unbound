@@ -25,7 +25,7 @@ export class Service {
     }
 
     try {
-      return await this.databases.createDocument(
+      const response = await this.databases.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug,
@@ -38,6 +38,12 @@ export class Service {
           userName,
         }
       );
+
+      if (response && response.$id) {
+        return response;
+      } else {
+        throw new Error("Failed to create post: Response is missing $id");
+      }
     } catch (error) {
       console.error("Appwrite service :: createPost :: error", error);
       throw error;
@@ -50,7 +56,7 @@ export class Service {
     }
 
     try {
-      return await this.databases.updateDocument(
+      const response = await this.databases.updateDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug,
@@ -61,6 +67,12 @@ export class Service {
           status,
         }
       );
+
+      if (response && response.$id) {
+        return response;
+      } else {
+        throw new Error("Failed to update post: Response is missing $id");
+      }
     } catch (error) {
       console.error("Appwrite service :: updatePost :: error", error);
     }
@@ -90,11 +102,17 @@ export class Service {
     }
 
     try {
-      return await this.databases.getDocument(
+      const response = await this.databases.getDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug
       );
+
+      if (response) {
+        return response;
+      } else {
+        throw new Error("Failed to get post: Response is null or undefined");
+      }
     } catch (error) {
       console.error("Appwrite service :: getPost :: error", error);
       return false;
@@ -103,11 +121,17 @@ export class Service {
 
   async getPosts(queries = [Query.equal("status", "active")]) {
     try {
-      return await this.databases.listDocuments(
+      const response = await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         queries
       );
+
+      if (response && response.documents) {
+        return response;
+      } else {
+        throw new Error("Failed to get posts: Response is missing documents");
+      }
     } catch (error) {
       console.error("Appwrite service :: getPosts :: error", error);
       return false;
@@ -121,10 +145,12 @@ export class Service {
         ID.unique(),
         file
       );
+
       if (uploadedFile && uploadedFile.$id) {
         return uploadedFile;
+      } else {
+        throw new Error("File upload failed: Response is missing $id");
       }
-      throw new Error("File upload failed");
     } catch (error) {
       console.error("Appwrite service :: uploadFile :: error", error);
       return false;
@@ -147,9 +173,7 @@ export class Service {
 
   getFilePreview(fileId) {
     if (!fileId) {
-      console.error(
-        "Appwrite service :: getFilePreview :: error: Missing fileId"
-      );
+      console.error("Appwrite service :: getFilePreview :: error: Missing fileId");
       return null;
     }
     try {
@@ -162,11 +186,17 @@ export class Service {
 
   async getPostByUser(userId) {
     try {
-      return await this.databases.listDocuments(
+      const response = await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         [Query.equal("userId", userId)]
       );
+
+      if (response && response.documents) {
+        return response;
+      } else {
+        throw new Error("Failed to get posts by user: Response is missing documents");
+      }
     } catch (error) {
       console.error("Appwrite service :: getPostsByUser :: error", error);
       return false;
@@ -175,12 +205,18 @@ export class Service {
 
   async createComment({ postId, userId, content, userName }) {
     try {
-      return await this.databases.createDocument(
+      const response = await this.databases.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCommentsCollectionId,
         ID.unique(),
         { postId, userId, content, userName }
       );
+
+      if (response && response.$id) {
+        return response;
+      } else {
+        throw new Error("Failed to create comment: Response is missing $id");
+      }
     } catch (error) {
       console.error("Appwrite service :: createComment :: error", error);
       throw error;
@@ -189,11 +225,17 @@ export class Service {
 
   async getCommentsByPost(postId) {
     try {
-      return await this.databases.listDocuments(
+      const response = await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCommentsCollectionId,
         [Query.equal("postId", postId)]
       );
+
+      if (response && response.documents) {
+        return response;
+      } else {
+        throw new Error("Failed to get comments by post: Response is missing documents");
+      }
     } catch (error) {
       console.error("Appwrite service :: getCommentsByPost :: error", error);
       return false;

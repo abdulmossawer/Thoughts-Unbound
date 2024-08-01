@@ -4,14 +4,14 @@ import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "../index";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { toast } from 'react-toastify'; // Import toasta
+import { toast } from 'react-toastify'; // Import toast
 
 export default function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
     defaultValues: {
       title: post?.title || "",
       content: post?.content || "",
-      slug: post?.$id || "",
+      slug: post?.$id || "", // Ensure `slug` is correctly assigned
       status: post?.status || "active",
     },
   });
@@ -124,7 +124,7 @@ export default function PostForm({ post }) {
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
-        {post && (
+        {post && post.featuredImage && (
           <div className="w-full mb-4">
             <img
               src={appwriteService.getFilePreview(post.featuredImage)}

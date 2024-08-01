@@ -2,11 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import appwriteService from "../appwrite/config";
 
-function PostCard({ $id, title, featuredImage, userName }) {
+function PostCard({ $id = '', title = 'Default Title', featuredImage = '', userName = 'Anonymous' }) {
+  // Ensure $id and other props are valid
+  if (!$id) {
+    console.error("Missing $id prop");
+    return null;
+  }
+
   return (
     <Link to={`/post/${$id}`} className="block">
       <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-700 p-4 transition-transform transform hover:scale-105 mx-auto">
         <div className="flex items-center mb-4">
+          {/* Optional User Image */}
           {/* <div className="mr-4">
             <img
               src="https://via.placeholder.com/50"

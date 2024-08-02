@@ -51,10 +51,10 @@ export default function Post() {
       });
       setNewComment(""); // Clear the input field
       fetchComments(post.$id); // Refresh comments list
-      toast.success('Comment added successfully')
+      toast.success('Comment added successfully');
     } catch (error) {
-        toast.error('Failed to comment')
-    //   console.error("Failed to create comment", error);
+      toast.error('Failed to comment');
+      console.error("Failed to create comment", error);
     }
   };
 
@@ -95,7 +95,9 @@ export default function Post() {
         <div className="w-full mb-6">
           <h1 className="text-2xl text-white font-bold">{post.title}</h1>
         </div>
-        <div className="browser-css text-white">{parse(post.content)}</div>
+        <div className="browser-css text-white">
+          {parse(post.content || '')}
+        </div>
         
         <div className="mt-6">
           <h2 className="text-xl text-white font-semibold">Comments</h2>
